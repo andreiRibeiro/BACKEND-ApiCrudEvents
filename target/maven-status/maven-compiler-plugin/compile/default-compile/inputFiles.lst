@@ -1,0 +1,10 @@
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/service/EventService.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/service/SequenceGeneratorService.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/document/EventDocument.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/controller/EventControllerAdvice.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/repository/EventRepository.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/controller/EventController.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/EventsApiApplication.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/model/ErrorMessageDTO.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/configuration/SwaggerConfig.java
+/home/andrei/Cursos/Nkay/src/main/java/br/com/aaribeiro/eventsApi/document/DatabaseSequenceDocument.java
