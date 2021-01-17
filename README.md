@@ -4,6 +4,8 @@ Este projeto tem como objetivo realizar a criação e autenticação de usuário
 
 O serviço é executado com Spring Boot e conta com endpoint's RestFull, testes de integração com MockMvc, persistência de dados com JPA/MongoDB, e documentação de api com Swagger.
 
+O processo de authorization é feito via header com Bearer + token.
+
 O sistema está disponível em https://events-nkay.herokuapp.com/swagger-ui.html#/
 
 #### 1) Formas de execução do sistema e testes de integração.
