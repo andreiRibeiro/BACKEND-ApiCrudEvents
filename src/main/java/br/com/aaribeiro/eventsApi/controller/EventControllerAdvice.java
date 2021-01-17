@@ -1,5 +1,6 @@
 package br.com.aaribeiro.eventsApi.controller;
 
+import br.com.aaribeiro.eventsApi.exception.InvalidPasswordException;
 import br.com.aaribeiro.eventsApi.model.ErrorMessageDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,12 @@ public class EventControllerAdvice {
     public ResponseEntity<Object> genericException(Exception e){
         ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO("Exception generic.", LocalDate.now().toString(), e.getLocalizedMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessageDTO);
+    }
+
+    @ExceptionHandler(value = {InvalidPasswordException.class})
+    public ResponseEntity<Object> authenticateException(InvalidPasswordException e){
+        ErrorMessageDTO errorMessageDTO = new ErrorMessageDTO("Exception authenticate.", LocalDate.now().toString(), e.getLocalizedMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessageDTO);
     }
 
     @ExceptionHandler(value = {HttpMessageNotReadableException.class})
@@ -40,7 +47,7 @@ public class EventControllerAdvice {
 
     private String returnsMessageAsException(String error){
         if (error.contains("DateTimeParseException")){
-            return "The dateOfBirth Field must be in the format dd/MM/yyyy";
+            return "The dateOfEvent Field must be in the format dd/MM/yyyy";
         }
         if (error.contains("MismatchedInputException")){
             return "PATCH object is in incompatible format. Ex.: [{op: replace, path: /name, value: Andrei Antonio Ribeiro}]";

@@ -7,8 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -37,8 +38,14 @@ public class EventService {
         eventRepository.deleteById(id);
     }
 
-    public EventDocument setEvent(EventDocument movieJson) throws Exception {
-        return eventRepository.save(movieJson);
+    public EventDocument setEvent(EventDocument eventDocument) throws Exception {
+        String email = eventDocument.getUser();
+        if (SecurityContextHolder.getContext().getAuthentication() != null){
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            email = user.getUsername();
+        }
+        eventDocument.setUser(email);
+        return eventRepository.save(eventDocument);
     }
 
     public EventDocument applyPatchToEvent(JsonPatch patch, EventDocument targetEvent) throws Exception {

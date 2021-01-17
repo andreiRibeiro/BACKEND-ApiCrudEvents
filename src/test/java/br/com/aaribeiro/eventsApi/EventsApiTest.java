@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import java.time.LocalDate;
 
 public class EventsApiTest extends EventsApiApplicationTest {
@@ -29,13 +28,17 @@ public class EventsApiTest extends EventsApiApplicationTest {
 
     @Before
     public void setUp() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(eventController).setControllerAdvice(eventControllerAdvice).build();
+        this.mockMvc = MockMvcBuilders.
+                standaloneSetup(eventController).
+                setControllerAdvice(eventControllerAdvice)
+                .build();
     }
 
     private String getEventJson() throws JsonProcessingException {
         EventDocument eventDocument = new EventDocument();
         eventDocument.setName("Andrei");
-        eventDocument.setDateOfBirth(LocalDate.of(1990, 05, 03));
+        eventDocument.setUser("andrei@gmail.com");
+        eventDocument.setDateOfEvent(LocalDate.of(1990, 05, 03));
 
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(eventDocument);

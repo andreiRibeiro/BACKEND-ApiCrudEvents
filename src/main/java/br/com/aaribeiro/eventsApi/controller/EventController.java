@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/events")
-@Api(tags = "Events")
+@Api(tags = "Register, Consult, Change and Delete Events")
 public class EventController {
 
     @Autowired
@@ -34,6 +34,7 @@ public class EventController {
     @ApiOperation(value = "Get event.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Return event."),
+            @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 404, message = "Event not found."),
             @ApiResponse(code = 500, message = "General processing errors .")
     })
@@ -53,6 +54,7 @@ public class EventController {
     @ApiOperation(value = "Get events with pagination.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Return all events."),
+            @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 500, message = "General processing errors.")
     })
     public ResponseEntity<Page<EventDocument>> getEvents(
@@ -68,6 +70,11 @@ public class EventController {
 
     @GetMapping(path = "/find", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Search by name (or containing parts) with pagination.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Return search."),
+            @ApiResponse(code = 403, message = "Forbidden."),
+            @ApiResponse(code = 500, message = "General processing errors.")
+    })
     public ResponseEntity<Page<EventDocument>> find(
         @RequestParam(value = "name", required = false) String name,
         @RequestParam(value = "page", defaultValue = "0", required = false) int page,
@@ -81,6 +88,7 @@ public class EventController {
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Event created with successful."),
             @ApiResponse(code = 400, message = "Something wrong with your request."),
+            @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 500, message = "General processing errors.")
     })
     public ResponseEntity<EventDocument> setEvent(@RequestBody @Valid EventDocument eventDocument) throws Exception {
@@ -93,6 +101,7 @@ public class EventController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Event change success"),
             @ApiResponse(code = 400, message = "Something wrong with your request."),
+            @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 500, message = "General processing errors.")
     })
     public ResponseEntity<EventDocument> changeEvent(@PathVariable int id, @RequestBody JsonPatch patch) throws Exception {
@@ -100,7 +109,7 @@ public class EventController {
         if (eventDocument.isPresent()){
             EventDocument eventPatched = eventService.applyPatchToEvent(patch, eventDocument.get());
             eventService.updateEvent(eventPatched);
-            return ResponseEntity.ok(eventPatched);
+            return ResponseEntity.status(HttpStatus.OK).body(eventPatched);
         }
         return null;
     }
@@ -109,7 +118,8 @@ public class EventController {
     @ApiOperation(value = "Update event.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Update the events. If the event does not exist, a new event will be created."),
-            @ApiResponse(code = 400, message = "Something wrong with your request.")
+            @ApiResponse(code = 400, message = "Something wrong with your request."),
+            @ApiResponse(code = 403, message = "Forbidden.")
     })
     public ResponseEntity<EventDocument> updateEvent(@RequestBody @Valid EventDocument eventDocument) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(eventService.updateEvent(eventDocument));
@@ -119,6 +129,7 @@ public class EventController {
     @ApiOperation(value = "Delete event.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Event deleted"),
+            @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 404, message = "Event not found")
     })
     public ResponseEntity deleteEvent(@PathVariable int id){

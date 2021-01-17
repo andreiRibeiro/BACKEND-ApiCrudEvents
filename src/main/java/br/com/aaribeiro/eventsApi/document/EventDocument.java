@@ -29,9 +29,11 @@ public class EventDocument implements Serializable {
     @NotNull(message = "{name.not.null}")
     private String name;
 
-    @NotNull(message = "{dateOfBirth.not.null}")
+    @NotNull(message = "{dateOfEvent.not.null}")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dateOfBirth;
+    private LocalDate dateOfEvent;
+
+    private String user;
 }
