@@ -23,4 +23,4 @@ O sistema está disponível em https://events-nkay.herokuapp.com/swagger-ui.html
 ![](img/swagger.png)
 
 #### 4) Interface de requisições
-><code>[PostmanCollection.json](Customers.postman_collection.json)</code>
+><code>[PostmanCollection.json](Nkay-Events.postman_collection.json)</code>
