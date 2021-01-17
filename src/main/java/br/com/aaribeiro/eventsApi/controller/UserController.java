@@ -61,7 +61,9 @@ public class UserController {
             @ApiResponse(code = 404, message = "User not found."),
             @ApiResponse(code = 500, message = "General processing errors.")
     })
-    ResponseEntity<UserDocument> getUser(@PathVariable Integer id){
+    ResponseEntity<UserDocument> getUser(
+            @RequestHeader(value = "Authorization", required = true) String authorization,
+            @PathVariable Integer id){
         UserDocument user = this.userService.getUser(id);
         if (user != null) return ResponseEntity.status(HttpStatus.OK).body(user);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

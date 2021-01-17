@@ -49,6 +49,7 @@ public class EventsApiTest extends EventsApiApplicationTest {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content(this.getEventJson())
         )
                 .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -59,6 +60,7 @@ public class EventsApiTest extends EventsApiApplicationTest {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content("{}")
         )
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
@@ -71,6 +73,7 @@ public class EventsApiTest extends EventsApiApplicationTest {
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content(this.getEventJson())).andReturn();
 
         EventDocument eventDocument = mapper.readValue(result.getResponse().getContentAsString(), EventDocument.class);
@@ -80,6 +83,7 @@ public class EventsApiTest extends EventsApiApplicationTest {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .put("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content(mapper.writeValueAsString(eventDocument))
         )
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -91,12 +95,14 @@ public class EventsApiTest extends EventsApiApplicationTest {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content(this.getEventJson())
         );
 
         /*GET Event*/
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get("/events/1")
+                .header("Authorization", "")
         )
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -105,6 +111,7 @@ public class EventsApiTest extends EventsApiApplicationTest {
     public void mustConsultEventThatDoesNotExists_ReturnStatusCode404() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get("/events/99")
+                .header("Authorization", "")
         ).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
@@ -114,18 +121,21 @@ public class EventsApiTest extends EventsApiApplicationTest {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content(this.getEventJson())
         );
 
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content(this.getEventJson())
         );
 
         /*DELETE Event*/
         this.mockMvc.perform(MockMvcRequestBuilders
                 .delete("/events/1")
+                .header("Authorization", "")
         ).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -135,6 +145,7 @@ public class EventsApiTest extends EventsApiApplicationTest {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .post("/events")
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "")
                 .content(this.getEventJson())
         );
 
@@ -144,6 +155,7 @@ public class EventsApiTest extends EventsApiApplicationTest {
         this.mockMvc.perform(MockMvcRequestBuilders
                 .patch("/events/1")
                 .contentType("application/json-patch+json")
+                .header("Authorization", "")
                 .content(patch)
         ).andExpect(MockMvcResultMatchers.status().isOk());
     }

@@ -38,7 +38,9 @@ public class EventController {
             @ApiResponse(code = 404, message = "Event not found."),
             @ApiResponse(code = 500, message = "General processing errors .")
     })
-    public ResponseEntity<EventDocument> getEvent(@PathVariable int id) throws Exception {
+    public ResponseEntity<EventDocument> getEvent(
+            @RequestHeader(value = "Authorization", required = true) String authorization,
+            @PathVariable int id) throws Exception {
         try {
             Optional<EventDocument> eventDocument = eventService.getEvent(id);
             if (!eventDocument.isPresent()) {
@@ -58,6 +60,7 @@ public class EventController {
             @ApiResponse(code = 500, message = "General processing errors.")
     })
     public ResponseEntity<Page<EventDocument>> getEvents(
+            @RequestHeader(value = "Authorization", required = true) String authorization,
             @RequestParam(value = "page", defaultValue = "0", required = false) int page,
             @RequestParam(value = "size", defaultValue = "10", required = false) int size) throws Exception {
         try {
@@ -76,9 +79,10 @@ public class EventController {
             @ApiResponse(code = 500, message = "General processing errors.")
     })
     public ResponseEntity<Page<EventDocument>> find(
-        @RequestParam(value = "name", required = false) String name,
-        @RequestParam(value = "page", defaultValue = "0", required = false) int page,
-        @RequestParam(value = "size", defaultValue = "10", required = false) int size) throws Exception {
+            @RequestHeader(value = "Authorization", required = true) String authorization,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(value = "size", defaultValue = "10", required = false) int size) throws Exception {
         PageRequest pageable = PageRequest.of(page, size, Sort.Direction.ASC, "name");
         return ResponseEntity.status(HttpStatus.OK).body(eventService.find(name, pageable));
     }
@@ -91,7 +95,9 @@ public class EventController {
             @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 500, message = "General processing errors.")
     })
-    public ResponseEntity<EventDocument> setEvent(@RequestBody @Valid EventDocument eventDocument) throws Exception {
+    public ResponseEntity<EventDocument> setEvent(
+            @RequestHeader(value = "Authorization", required = true) String authorization,
+            @RequestBody @Valid EventDocument eventDocument) throws Exception {
         eventDocument.setId(sequenceGeneratorService.generateSequence(EventDocument.EVENTS_SEQUENCE));
         return ResponseEntity.status(HttpStatus.CREATED).body(eventService.setEvent(eventDocument));
     }
@@ -104,7 +110,9 @@ public class EventController {
             @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 500, message = "General processing errors.")
     })
-    public ResponseEntity<EventDocument> changeEvent(@PathVariable int id, @RequestBody JsonPatch patch) throws Exception {
+    public ResponseEntity<EventDocument> changeEvent(
+            @RequestHeader(value = "Authorization", required = true) String authorization,
+            @PathVariable int id, @RequestBody JsonPatch patch) throws Exception {
         Optional<EventDocument> eventDocument = eventService.getEvent(id);
         if (eventDocument.isPresent()){
             EventDocument eventPatched = eventService.applyPatchToEvent(patch, eventDocument.get());
@@ -121,7 +129,9 @@ public class EventController {
             @ApiResponse(code = 400, message = "Something wrong with your request."),
             @ApiResponse(code = 403, message = "Forbidden.")
     })
-    public ResponseEntity<EventDocument> updateEvent(@RequestBody @Valid EventDocument eventDocument) throws Exception {
+    public ResponseEntity<EventDocument> updateEvent(
+            @RequestHeader(value = "Authorization", required = true) String authorization,
+            @RequestBody @Valid EventDocument eventDocument) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(eventService.updateEvent(eventDocument));
     }
 
@@ -132,7 +142,9 @@ public class EventController {
             @ApiResponse(code = 403, message = "Forbidden."),
             @ApiResponse(code = 404, message = "Event not found")
     })
-    public ResponseEntity deleteEvent(@PathVariable int id){
+    public ResponseEntity deleteEvent(
+            @RequestHeader(value = "Authorization", required = true) String authorization,
+            @PathVariable int id){
         try {
             eventService.deleteEvent(id);
             return ResponseEntity.status(HttpStatus.OK).body(null);
