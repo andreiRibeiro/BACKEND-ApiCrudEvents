@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "29dd2ca1-be6e-4a26-9e19-b72095f6e4d7",
+		"name": "Nkay-Events",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"andrei@gmail.com\",\n  \"id\": 0,\n  \"name\": \"Andrei\",\n  \"password\": \"000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9098/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9098",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST authenticate user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"andrei@gmail.com\",\n  \"password\": \"000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9098/users/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9098",
+					"path": [
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmRyZWlAZ21haWwuY29tIiwiZXhwIjoxNjEwOTIzNjMxfQ.exhvtPrlhlN_LgTBLaij2uHXtu4HYAdC2mfxx45SDU-MA47kZSDB85wpuk9jLB2lzGsiR7VMq7OpPlgLY6BEkQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9098/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9098",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmRyZWlAZ21haWwuY29tIiwiZXhwIjoxNjEwOTIzNjMxfQ.exhvtPrlhlN_LgTBLaij2uHXtu4HYAdC2mfxx45SDU-MA47kZSDB85wpuk9jLB2lzGsiR7VMq7OpPlgLY6BEkQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dateOfEvent\": \"12/12/2020\",\n  \"id\": 0,\n  \"name\": \"Festa 3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9098/events/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9098",
+					"path": [
+						"events",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET events",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmRyZWlAZ21haWwuY29tIiwiZXhwIjoxNjEwOTIzNjMxfQ.exhvtPrlhlN_LgTBLaij2uHXtu4HYAdC2mfxx45SDU-MA47kZSDB85wpuk9jLB2lzGsiR7VMq7OpPlgLY6BEkQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9098/events/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9098",
+					"path": [
+						"events",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT events",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmRyZWlAZ21haWwuY29tIiwiZXhwIjoxNjEwOTIzNjMxfQ.exhvtPrlhlN_LgTBLaij2uHXtu4HYAdC2mfxx45SDU-MA47kZSDB85wpuk9jLB2lzGsiR7VMq7OpPlgLY6BEkQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"name\": \"Festa 3 - PUT\",\n    \"dateOfEvent\": \"12/12/2020\",\n    \"user\": \"andrei@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9098/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9098",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

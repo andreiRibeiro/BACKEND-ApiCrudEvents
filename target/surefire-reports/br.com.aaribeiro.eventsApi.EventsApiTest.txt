@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: br.com.aaribeiro.eventsApi.EventsApiTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.72 s - in br.com.aaribeiro.eventsApi.EventsApiTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.266 s - in br.com.aaribeiro.eventsApi.EventsApiTest
