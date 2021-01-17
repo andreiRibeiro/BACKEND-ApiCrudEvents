@@ -2,7 +2,7 @@
 
 Este projeto tem como objetivo realizar a criação e autenticação de usuários, e o CRUD de eventos.
 
-O serviço é executado com Spring Boot e conta com endpoint's RestFull, testes de integração com MockMvc, persistência de dados com JPA/MongoDB, e documentação de api com Swagger.
+O serviço é executado com Spring Boot e conta com endpoint's RestFull, testes de integração com MockMvc, persistência de dados com JPA/MongoDB, autenticação JWT e documentação de api com Swagger.
 
 O processo de authorization é feito via header com <code>Bearer token</code>
 
