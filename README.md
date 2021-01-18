@@ -10,7 +10,7 @@ O sistema está disponível em https://events-nkay.herokuapp.com/swagger-ui.html
 
 #### 1) Formas de execução do sistema e testes de integração.
 
-   ##### Executar com Docker-Compose 
+   ##### Executar com Jar 
    ><code>java -jar eventsApi-0.0.1-SNAPSHOT.jar</code>
 
    ##### Executar testes integração 
